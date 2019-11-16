@@ -2,6 +2,7 @@ import React, {Component, Fragment} from 'react';
 import './style.css'
 import api from '../../services/api';
 import Search from '../Search/search'
+import Loader from '../Loader/Loader'
 import {Link} from 'react-router-dom';
 
 class Commit extends Component {
@@ -9,7 +10,8 @@ class Commit extends Component {
     super(props)
     this.state = {
       myCommits: [],
-      valueS: ''
+      valueS: '',
+      loader: true
     }
     this.searchCommits = this.searchCommits.bind(this)
   }
@@ -19,7 +21,8 @@ class Commit extends Component {
     api.get(`/repos/gabrielEscame/${name}/commits`)
       .then(response => {
         this.setState({
-          myCommits: response.data
+          myCommits: response.data,
+          loader: false
         })
       })
       .catch(err => console.log(err)
@@ -41,18 +44,27 @@ class Commit extends Component {
   render(){
     return(
       <Fragment>
-        <div className='search-div'>
-        <h1>Search:</h1>
-        <Search className='banana'placeholder='Search' value={this.state.valueS} method={this.searchCommits} />
-        </div>
-        <div className='commit-ul'>
+        {
+          this.state.loader ? <Loader /> : null
+        }
+        {
+          this.state.loader ? null : <div className='search-div'>
+          <h1>Search:</h1>
+          <Search className='banana'placeholder='Search' value={this.state.valueS} method={this.searchCommits} />
+          </div>
+        }
+        {
+          this.state.loader ? null : <div className='commit-ul'>
           <ul>
             {this.filterCommits(this.state.valueS).map((e, idx) => (
               idx <= 19 ? <li className='commit-name'key={idx}>- {e.commit.message}</li> : null
             ))}
           </ul>
         </div>
-        <Link className='commit-voltar' to='/'>Voltar</Link>
+        }
+        {
+          this.state.loader ? null : <Link className='commit-voltar' to='/'>Voltar</Link>
+        }
         </ Fragment>
     )
   }
