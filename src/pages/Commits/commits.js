@@ -1,8 +1,8 @@
 import React, {Component, Fragment} from 'react';
 import './style.css'
 import api from '../../services/api';
-import Search from '../Search/search'
-import Loader from '../Loader/Loader'
+import Search from '../../components/Search/search'
+import Loader from '../../components/Loader/Loader'
 import {Link} from 'react-router-dom';
 
 class Commit extends Component {

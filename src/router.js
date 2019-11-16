@@ -1,7 +1,7 @@
 import React from 'react';
 import {Route, BrowserRouter, Switch} from 'react-router-dom';
 import RepoPage from '../src/pages/repo-page/repo-page'
-import Commit from './components/Commits/commits';
+import Commit from '../src/pages/Commits/commits';
 
 const Router = () => (
   <BrowserRouter>
