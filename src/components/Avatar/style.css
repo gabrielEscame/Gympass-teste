@@ -1,0 +1,17 @@
+img{
+  height: 300px;
+  border-radius: 2000px;
+}
+
+.avatar-description{
+  position: fixed;
+  left: 40px;
+  top: 100px;
+}
+
+h1{
+  font-size: 25px;
+  text-align: center;
+  padding-top: 20px;
+  color: lightgray;
+}
